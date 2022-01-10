@@ -1,0 +1,19 @@
+.NavBar {
+  display: flex;
+  height: 10vh;
+}
+
+.NavBar > div > h1 {
+  margin: auto 10px;
+}
+
+.NavBar > Button {
+  justify-content: end;
+  flex: 1;
+}
+
+.vCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
