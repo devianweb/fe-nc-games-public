@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
-import "./Reviews.css";
+import "./css/Reviews.css";
 
 // MUI STUFF
-import { CircularProgress, Paper } from "@mui/material";
+import { Paper, LinearProgress } from "@mui/material";
 // END OF MUI STUFF
 
-const Reviews = () => {
-  const [isLoading, setIsLoading] = useState(false);
+const Reviews = ({ isLoading, setIsLoading }) => {
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -15,13 +15,21 @@ const Reviews = () => {
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
-        console.log(data);
+        setReviews(data.reviews);
       });
   }, []);
 
   return (
-    <Paper className="paper-container Reviews" elevation={2}>
-      {isLoading ? <CircularProgress /> : <ReviewCard />}
+    <Paper className="paper-container" elevation={2}>
+      {isLoading ? (
+        <LinearProgress />
+      ) : (
+        <div className="flex-container">
+          {reviews.map((review, key) => {
+            return <ReviewCard review={review} key={key} />;
+          })}
+        </div>
+      )}
     </Paper>
   );
 };

@@ -1,6 +1,10 @@
 .NavBar {
   display: flex;
-  height: 10vh;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  border: 5px solid grey;
+  padding: 5px;
 }
 
 .NavBar > div > h1 {

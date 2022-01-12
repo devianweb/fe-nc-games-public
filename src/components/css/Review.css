@@ -1,0 +1,48 @@
+.Review-container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 25% 25% 25% 25%;
+  grid-template-areas:
+    "t i"
+    "o i"
+    "c i"
+    "d i";
+}
+
+.i {
+  grid-area: i;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  align-self: center;
+  justify-self: end;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .i {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.t {
+  grid-area: t;
+}
+
+.o {
+  grid-area: o;
+}
+
+.c {
+  grid-area: c;
+}
+
+.d {
+  grid-area: d;
+}
+
+.Review-container > p {
+  margin: 5px;
+}

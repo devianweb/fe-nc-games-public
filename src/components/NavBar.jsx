@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./NavBar.css";
+import "./css/NavBar.css";
 // MUI STUFF
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,7 +13,6 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Paper,
 } from "@mui/material";
 // END OF MUI STUFF
 
@@ -29,7 +28,7 @@ const NavBar = () => {
   };
 
   return (
-    <Paper className="NavBar paper-container" elevation={2}>
+    <div className="NavBar">
       <div className="vCenter">
         <h1>nc-games</h1>
       </div>
@@ -51,7 +50,7 @@ const NavBar = () => {
           </List>
         </Box>
       </Drawer>
-    </Paper>
+    </div>
   );
 };
 

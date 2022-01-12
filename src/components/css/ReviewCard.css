@@ -1,0 +1,42 @@
+.ReviewCard-container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 25% 25% 25% 25%;
+  grid-template-areas:
+    "title review-img-url"
+    "owner review-img-url"
+    "review-body review-body"
+    "review-body review-body";
+  grid-gap: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .ReviewCard-container {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas:
+      "title review-img-url"
+      "owner review-img-url";
+    grid-gap: 5px;
+  }
+}
+
+.title {
+  grid-area: title;
+}
+
+.owner {
+  grid-area: owner;
+}
+.review-body {
+  grid-area: review-body;
+}
+
+.review-img-url {
+  grid-area: review-img-url;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  place-self: center;
+}
