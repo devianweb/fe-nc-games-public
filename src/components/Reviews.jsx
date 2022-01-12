@@ -6,8 +6,9 @@ import "./css/Reviews.css";
 import { Paper, LinearProgress } from "@mui/material";
 // END OF MUI STUFF
 
-const Reviews = ({ isLoading, setIsLoading }) => {
+const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,8 +26,8 @@ const Reviews = ({ isLoading, setIsLoading }) => {
         <LinearProgress />
       ) : (
         <div className="flex-container">
-          {reviews.map((review, key) => {
-            return <ReviewCard review={review} key={key} />;
+          {reviews.map((review) => {
+            return <ReviewCard review={review} key={review.review_id} />;
           })}
         </div>
       )}

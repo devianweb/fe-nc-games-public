@@ -1,0 +1,26 @@
+.CommentCard-container {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  grid-template-rows: 25% 75%;
+  grid-template-areas:
+    "vb d"
+    "vb b";
+  grid-gap: 5px;
+}
+
+.vb {
+  grid-area: vb;
+  place-self: center;
+  margin: 5px;
+}
+
+.d {
+  grid-area: d;
+  display: flex;
+  align-self: center;
+  gap: 10px;
+}
+
+.b {
+  grid-area: b;
+}

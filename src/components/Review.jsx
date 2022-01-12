@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 import "./css/Review.css";
 
 // MUI STUFF
 import { Paper, LinearProgress } from "@mui/material";
 // END OF MUI STUFF
 
-const Review = ({ isLoading, setIsLoading }) => {
+const Review = () => {
   const [review, setReview] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { review_id } = useParams();
-
-  console.log(review);
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,7 +21,7 @@ const Review = ({ isLoading, setIsLoading }) => {
         setIsLoading(false);
         setReview(data.review);
       });
-  }, []);
+  }, [review_id]);
 
   return (
     <>
@@ -34,13 +34,15 @@ const Review = ({ isLoading, setIsLoading }) => {
             <p className="o">{review.owner}</p>
             <p className="c">{review.category}</p>
             <p className="d">{review.designer}</p>
-            <img src={review.review_img_url} className="i" />
+            <img src={review.review_img_url} className="i" alt="" />
           </div>
         )}
       </Paper>
-      <Paper className="paper-container" elevation={2}>
-        <p>{review.review_body}</p>
-      </Paper>
+      {isLoading ? null : (
+        <Paper className="paper-container" elevation={2}>
+          <p>{review.review_body}</p>
+        </Paper>
+      )}
     </>
   );
 };
