@@ -1,10 +1,27 @@
 import { Paper, IconButton } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useMediaQuery } from "@react-hook/media-query";
+import { UserContext } from "../contexts/User/User";
+import { useContext } from "react";
 import "./css/CommentCard.css";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, setRender }) => {
+  const { user } = useContext(UserContext);
+
   const screenSize = useMediaQuery("only screen and (max-width: 600px)");
+
+  const handleDelete = () => {
+    setRender(false);
+    fetch(
+      `https://ian-nc-games.herokuapp.com/api/comments/${comment.comment_id}`,
+      {
+        method: "DELETE",
+      }
+    ).then(() => {
+      setRender(true);
+    });
+  };
 
   return (
     <Paper elevation={2} className="paper-container CommentCard-container">
@@ -17,9 +34,16 @@ const CommentCard = ({ comment }) => {
             : " - " + new Date(comment.created_at).toLocaleTimeString("en-gb")}
         </p>
         <p>👍 {comment.votes}</p>
+        {user === comment.author ? (
+          <IconButton onClick={handleDelete}>
+            <DeleteIcon />
+          </IconButton>
+        ) : (
+          <></>
+        )}
       </div>
       <p className="b">{comment.body}</p>
-      <IconButton aria-label="delete" className="vb">
+      <IconButton disabled={true} className="vb">
         <ThumbUpIcon />
       </IconButton>
     </Paper>

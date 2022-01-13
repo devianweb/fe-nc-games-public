@@ -1,12 +1,13 @@
 .ReviewCard-container {
   display: grid;
   grid-template-columns: 70% 30%;
-  grid-template-rows: 25% 25% 25% 25%;
+  grid-template-rows: repeat(5, 1fr);
   grid-template-areas:
     "title review-img-url"
     "owner review-img-url"
     "review-body review-body"
-    "review-body review-body";
+    "review-body review-body"
+    "details details";
   grid-gap: 5px;
 }
 
@@ -14,10 +15,11 @@
   .ReviewCard-container {
     display: grid;
     grid-template-columns: 70% 30%;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: repeat(3, 1fr);
     grid-template-areas:
       "title review-img-url"
-      "owner review-img-url";
+      "owner review-img-url"
+      "details details";
     grid-gap: 5px;
   }
 }
@@ -29,8 +31,16 @@
 .owner {
   grid-area: owner;
 }
+
 .review-body {
   grid-area: review-body;
+}
+
+.details {
+  grid-area: details;
+  display: flex;
+  column-gap: 10px;
+  justify-content: flex-end;
 }
 
 .review-img-url {

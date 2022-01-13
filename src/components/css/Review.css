@@ -1,12 +1,13 @@
 .Review-container {
   display: grid;
   grid-template-columns: 70% 30%;
-  grid-template-rows: 25% 25% 25% 25%;
+  grid-template-rows: repeat(5, 1fr);
   grid-template-areas:
     "t i"
     "o i"
     "c i"
-    "d i";
+    "d i"
+    "v i";
 }
 
 .i {
@@ -39,10 +40,18 @@
   grid-area: c;
 }
 
-.d {
+.des {
   grid-area: d;
+}
+
+.v {
+  grid-area: v;
+  display: flex;
+  column-gap: 20px;
 }
 
 .Review-container > p {
   margin: 5px;
+  display: flex;
+  align-items: center;
 }

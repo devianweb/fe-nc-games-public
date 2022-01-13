@@ -15,6 +15,10 @@ const ReviewCard = ({ review }) => {
           {screenSize ? null : review.review_body.slice(0, 150) + "..."}
         </div>
         <img src={review.review_img_url} className="review-img-url" alt="" />
+        <div className="details">
+          <p>👍 {review.votes}</p>
+          <p>💬 {review.comment_count}</p>
+        </div>
       </Paper>
     </Link>
   );

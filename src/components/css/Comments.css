@@ -1,0 +1,11 @@
+.comments {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  row-gap: 15px;
+}
+
+.post-comment {
+  display: flex;
+  justify-content: flex-end;
+}
