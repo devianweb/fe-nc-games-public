@@ -6,9 +6,10 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState("");
 
   useEffect(() => {
-    const username = localStorage.getItem("user");
+    let username = localStorage.getItem("user");
     if (username === null) {
       localStorage.setItem("user", "");
+      username = localStorage.getItem("user");
     }
     setUser(username);
   }, []);
