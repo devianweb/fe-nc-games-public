@@ -7,6 +7,9 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const username = localStorage.getItem("user");
+    if (username === null) {
+      localStorage.setItem("user", "");
+    }
     setUser(username);
   }, []);
 
