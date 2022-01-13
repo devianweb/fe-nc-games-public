@@ -5,6 +5,10 @@
   row-gap: 15px;
 }
 
+.comments > p {
+  align-self: center;
+}
+
 .post-comment {
   display: flex;
   justify-content: flex-end;

@@ -1,29 +1,36 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../contexts/User/User";
+import NotFoundPage from "./NotFoundPage";
 
 import "./css/Review.css";
 
 // MUI STUFF
 import { Paper, LinearProgress, IconButton } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+
 // END OF MUI STUFF
 
 const Review = () => {
   const [review, setReview] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [render, setRender] = useState(false);
+  const [isError, setIsError] = useState(false);
   const { user } = useContext(UserContext);
 
   const { review_id } = useParams();
 
   useEffect(() => {
+    setIsError(false);
     setIsLoading(true);
     fetch(`https://ian-nc-games.herokuapp.com/api/reviews/${review_id}`)
-      .then((res) => res.json())
+      .then((res) => checkError(res))
       .then((data) => {
         setIsLoading(false);
         setReview(data.review);
+      })
+      .catch((err) => {
+        setIsError(true);
       });
   }, [review_id, render]);
 
@@ -35,12 +42,27 @@ const Review = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ inc_votes: 1 }),
-    }).then(() => {
-      setRender(true);
-    });
+    })
+      .then((res) => checkError(res))
+      .then(() => {
+        setRender(true);
+      })
+      .catch((err) => {
+        setIsError(true);
+      });
   };
 
-  return (
+  const checkError = (res) => {
+    if (res.status >= 200 && res.status <= 299) {
+      return res.json();
+    } else {
+      throw Error(res.statusText);
+    }
+  };
+
+  return isError ? (
+    <NotFoundPage />
+  ) : (
     <>
       <Paper className="paper-container" elevation={2}>
         {isLoading ? (
@@ -62,7 +84,6 @@ const Review = () => {
                 <ThumbUpIcon />
               </IconButton>
             </div>
-
             <img src={review.review_img_url} className="i" alt="" />
           </div>
         )}

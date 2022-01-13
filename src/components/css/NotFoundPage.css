@@ -1,0 +1,14 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+}
+
+.not-found > * {
+  display: flex;
+  justify-content: center;
+}
+
+.not-found > div > img {
+  max-width: 800px;
+  width: 100%;
+}

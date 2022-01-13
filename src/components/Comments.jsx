@@ -12,6 +12,7 @@ import AddCommentIcon from "@mui/icons-material/AddComment";
 const Comments = () => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [render, setRender] = useState(false);
   const [comErr, setComErr] = useState(false);
@@ -38,10 +39,17 @@ const Comments = () => {
           body: newComment,
         }),
       }
-    ).then(() => {
-      setNewComment("");
-      setRender(true);
-    });
+    )
+      .then((res) => {
+        checkError(res);
+      })
+      .then(() => {
+        setNewComment("");
+        setRender(true);
+      })
+      .catch((err) => {
+        setIsError(true);
+      });
   };
 
   const checkEmpty = () => {
@@ -52,19 +60,30 @@ const Comments = () => {
     }
   };
 
+  const checkError = (res) => {
+    if (res.status >= 200 && res.status <= 299) {
+      return res.json();
+    } else {
+      throw Error(res.statusText);
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true);
     fetch(
       `https://ian-nc-games.herokuapp.com/api/reviews/${review_id}/comments`
     )
-      .then((res) => res.json())
+      .then((res) => checkError(res))
       .then((data) => {
         setIsLoading(false);
         setComments(data.comments);
+      })
+      .catch((err) => {
+        setIsError(true);
       });
   }, [review_id, render]);
 
-  return isLoading ? null : (
+  return isError ? null : isLoading ? null : (
     <>
       <Paper className="paper-container comments">
         {user !== "" ? (
