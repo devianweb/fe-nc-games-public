@@ -1,5 +1,6 @@
 .NavBar {
   display: flex;
+  justify-content: flex-end;
   position: sticky;
   top: 0px;
   background-color: white;
@@ -7,19 +8,16 @@
   padding: 5px;
 }
 
-.NavBar > div > h1 {
+.NavBar > h1 {
   margin: auto 10px;
-}
-
-.NavBar > Button {
-  justify-content: end;
+  display: flex;
+  justify-content: left;
   flex: 1;
 }
 
-.vCenter {
+.NavBar > p {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
 .modal {

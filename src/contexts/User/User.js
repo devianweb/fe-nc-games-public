@@ -1,16 +1,23 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    const username = localStorage.getItem("user");
+    setUser(username);
+  }, []);
 
   const userLogin = (username) => {
     setUser(username);
+    localStorage.setItem("user", username);
   };
 
   const userLogout = () => {
-    setUser(null);
+    setUser("");
+    localStorage.setItem("user", "");
   };
 
   return (

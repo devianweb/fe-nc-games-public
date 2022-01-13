@@ -76,9 +76,8 @@ const NavBar = () => {
 
   return (
     <div className="NavBar">
-      <div className="vCenter">
-        <h1>nc-games</h1>
-      </div>
+      <h1>nc-games</h1>
+      <p>{user !== "" ? `Welcome ${user}!` : "Please login!"}</p>
       <Button onClick={handleClick}>
         <MenuIcon style={{ color: "black" }} />
       </Button>
@@ -93,7 +92,7 @@ const NavBar = () => {
                 <ListItemText>Home</ListItemText>
               </ListItem>
             </Link>
-            {user ? (
+            {user !== "" ? (
               <ListItem button onClick={handleLogout}>
                 <ListItemIcon>
                   <LogoutIcon />

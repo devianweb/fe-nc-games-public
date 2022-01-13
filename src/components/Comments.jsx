@@ -67,7 +67,7 @@ const Comments = () => {
   return isLoading ? null : (
     <>
       <Paper className="paper-container comments">
-        {user ? (
+        {user !== "" ? (
           <>
             <TextField
               error={comErr}
