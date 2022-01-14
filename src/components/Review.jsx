@@ -14,7 +14,6 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 const Review = () => {
   const [review, setReview] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [render, setRender] = useState(false);
   const [isError, setIsError] = useState(false);
   const { user } = useContext(UserContext);
 
@@ -32,10 +31,9 @@ const Review = () => {
       .catch((err) => {
         setIsError(true);
       });
-  }, [review_id, render]);
+  }, [review_id]);
 
   const handleClick = () => {
-    setRender(false);
     fetch(`https://ian-nc-games.herokuapp.com/api/reviews/${review_id}`, {
       method: "PATCH",
       headers: {
@@ -45,7 +43,9 @@ const Review = () => {
     })
       .then((res) => checkError(res))
       .then(() => {
-        setRender(true);
+        setReview((currReview) => {
+          return { ...currReview, votes: currReview.votes + 1 };
+        });
       })
       .catch((err) => {
         setIsError(true);

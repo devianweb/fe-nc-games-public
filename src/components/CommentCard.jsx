@@ -6,21 +6,18 @@ import { UserContext } from "../contexts/User/User";
 import { useContext } from "react";
 import "./css/CommentCard.css";
 
-const CommentCard = ({ comment, setRender }) => {
+const CommentCard = ({ comment }) => {
   const { user } = useContext(UserContext);
 
   const screenSize = useMediaQuery("only screen and (max-width: 600px)");
 
   const handleDelete = () => {
-    setRender(false);
     fetch(
       `https://ian-nc-games.herokuapp.com/api/comments/${comment.comment_id}`,
       {
         method: "DELETE",
       }
-    ).then(() => {
-      setRender(true);
-    });
+    );
   };
 
   return (

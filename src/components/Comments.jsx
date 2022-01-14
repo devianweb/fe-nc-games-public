@@ -14,10 +14,8 @@ const Comments = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [newComment, setNewComment] = useState("");
-  const [render, setRender] = useState(false);
   const [comErr, setComErr] = useState(false);
   const { user } = useContext(UserContext);
-
   const { review_id } = useParams();
 
   const handleChange = (e) => {
@@ -26,7 +24,6 @@ const Comments = () => {
 
   const handleClick = () => {
     setComErr(false);
-    setRender(false);
     fetch(
       `https://ian-nc-games.herokuapp.com/api/reviews/${review_id}/comments`,
       {
@@ -41,11 +38,18 @@ const Comments = () => {
       }
     )
       .then((res) => {
-        checkError(res);
+        return checkError(res);
+      })
+      .then((data) => {
+        const newComment = data.comment;
+        setComments((prevComments) => {
+          const newComments = [...prevComments];
+          newComments.push(newComment);
+          return newComments;
+        });
       })
       .then(() => {
         setNewComment("");
-        setRender(true);
       })
       .catch((err) => {
         setIsError(true);
@@ -81,7 +85,7 @@ const Comments = () => {
       .catch((err) => {
         setIsError(true);
       });
-  }, [review_id, render]);
+  }, [review_id]);
 
   return isError ? null : isLoading ? null : (
     <>
@@ -116,13 +120,7 @@ const Comments = () => {
           <p>There are no comments on this review!</p>
         ) : (
           comments.map((comment) => {
-            return (
-              <CommentCard
-                comment={comment}
-                key={comment.comment_id}
-                setRender={setRender}
-              />
-            );
+            return <CommentCard comment={comment} key={comment.comment_id} />;
           })
         )}
       </Paper>
