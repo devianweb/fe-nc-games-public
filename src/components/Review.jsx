@@ -15,6 +15,7 @@ const Review = () => {
   const [review, setReview] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [voted, setVoted] = useState(false);
   const { user } = useContext(UserContext);
 
   const { review_id } = useParams();
@@ -46,6 +47,7 @@ const Review = () => {
         setReview((currReview) => {
           return { ...currReview, votes: currReview.votes + 1 };
         });
+        setVoted(true);
       })
       .catch((err) => {
         setIsError(true);
@@ -79,7 +81,7 @@ const Review = () => {
                 aria-label="delete"
                 className="vb"
                 onClick={handleClick}
-                disabled={user ? false : true}
+                disabled={(user ? false : true) || voted}
               >
                 <ThumbUpIcon />
               </IconButton>
