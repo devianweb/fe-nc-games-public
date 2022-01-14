@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./css/NavBar.css";
 import { UserContext } from "../contexts/User/User";
 import { getUsers } from "./utils/api";
-// MUI STUFF
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
 import LoginIcon from "@mui/icons-material/Login";
@@ -21,7 +20,6 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
-// END OF MUI STUFF
 
 const NavBar = () => {
   const [drawer, setDrawer] = useState(false);

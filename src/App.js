@@ -5,14 +5,10 @@ import Reviews from "./components/Reviews";
 import Review from "./components/Review";
 import NotFoundPage from "./components/NotFoundPage";
 import Comments from "./components/Comments";
-
-// MUI STUFF
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-// import { Grid } from "@mui/material/";
-// END OF MUI STUFF
 
 function App() {
   return (

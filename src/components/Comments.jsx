@@ -4,11 +4,8 @@ import CommentCard from "./CommentCard";
 import "./css/Comments.css";
 import { UserContext } from "../contexts/User/User";
 import { getCommentsByReviewId } from "./utils/api";
-
-// MUI STUFF
 import { Paper, Button, TextField } from "@mui/material";
 import AddCommentIcon from "@mui/icons-material/AddComment";
-// END OF MUI STUFF
 
 const Comments = () => {
   const [comments, setComments] = useState([]);

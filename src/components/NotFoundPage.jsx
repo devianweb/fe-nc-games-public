@@ -1,8 +1,6 @@
 import "./css/NotFoundPage.css";
 
-// MUI STUFF
 import { Paper } from "@mui/material";
-// END OF MUI STUFF
 
 const NotFoundPage = () => {
   return (

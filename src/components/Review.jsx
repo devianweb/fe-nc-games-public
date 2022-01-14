@@ -3,13 +3,9 @@ import { useParams } from "react-router-dom";
 import { UserContext } from "../contexts/User/User";
 import NotFoundPage from "./NotFoundPage";
 import { patchReviewById, getReviewById } from "./utils/api";
-
 import "./css/Review.css";
-
-// MUI STUFF
 import { Paper, LinearProgress, IconButton } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-// END OF MUI STUFF
 
 const Review = () => {
   const [review, setReview] = useState([]);

@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import "./css/Reviews.css";
 import { getReviews, getCategories } from "./utils/api";
-
-// MUI STUFF
 import {
   Paper,
   LinearProgress,
@@ -13,7 +11,6 @@ import {
   Button,
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-// END OF MUI STUFF
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
