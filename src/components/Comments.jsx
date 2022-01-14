@@ -95,6 +95,7 @@ const Comments = () => {
               multiline
               onChange={handleChange}
               value={newComment}
+              inputProps={{ maxLength: 400 }}
             />
             <div className="post-comment">
               <Button
