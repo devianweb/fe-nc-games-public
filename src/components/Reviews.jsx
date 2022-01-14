@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import "./css/Reviews.css";
+import { getReviews, getCategories } from "./utils/api";
 
 // MUI STUFF
 import {
@@ -19,29 +20,23 @@ const Reviews = () => {
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("");
-  const [fetchingReviews, setfetchingReviews] = useState(true);
-  const [fetchingCategories, setfetchingCategories] = useState(true);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
+  const [categoriesLoading, setCategoriesLoading] = useState(false);
 
   useEffect(() => {
-    setfetchingReviews(true);
-    const queries = filter === "" ? "" : `&category=${filter}`;
-    const sorting = sort === "" ? `?sort_by=review_id` : `?sort_by=${sort}`;
-    fetch(`https://ian-nc-games.herokuapp.com/api/reviews${sorting}${queries}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setfetchingReviews(false);
-        setReviews(data.reviews);
-      });
+    setReviewsLoading(true);
+    getReviews(filter, sort).then((data) => {
+      setReviews(data.reviews);
+      setReviewsLoading(false);
+    });
   }, [filter, sort]);
 
   useEffect(() => {
-    setfetchingCategories(true);
-    fetch("https://ian-nc-games.herokuapp.com/api/categories")
-      .then((res) => res.json())
-      .then((data) => {
-        setfetchingCategories(false);
-        setCategories(data.categories);
-      });
+    setCategoriesLoading(true);
+    getCategories().then((data) => {
+      setCategories(data.categories);
+      setCategoriesLoading(false);
+    });
   }, []);
 
   const handleFilter = (e) => {
@@ -59,7 +54,7 @@ const Reviews = () => {
 
   return (
     <>
-      {fetchingReviews && fetchingCategories ? (
+      {categoriesLoading ? (
         <Paper className="paper-container" elevation={2}>
           <LinearProgress />
         </Paper>
@@ -94,7 +89,7 @@ const Reviews = () => {
           </FormControl>
         </Paper>
       )}
-      {fetchingReviews ? (
+      {reviewsLoading ? (
         <Paper className="paper-container" elevation={2}>
           <LinearProgress />
         </Paper>

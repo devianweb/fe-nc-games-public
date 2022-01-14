@@ -5,6 +5,7 @@ import { useMediaQuery } from "@react-hook/media-query";
 import { UserContext } from "../contexts/User/User";
 import { useContext } from "react";
 import "./css/CommentCard.css";
+import { deleteCommentsByCommentId } from "./utils/api";
 
 const CommentCard = ({ comment, setComments }) => {
   const { user } = useContext(UserContext);
@@ -12,12 +13,7 @@ const CommentCard = ({ comment, setComments }) => {
   const screenSize = useMediaQuery("only screen and (max-width: 600px)");
 
   const handleDelete = () => {
-    fetch(
-      `https://ian-nc-games.herokuapp.com/api/comments/${comment.comment_id}`,
-      {
-        method: "DELETE",
-      }
-    ).then(() => {
+    deleteCommentsByCommentId(comment.comment_id).then(() => {
       setComments((prevComments) => {
         return prevComments.filter((value) => {
           return value.comment_id !== comment.comment_id;

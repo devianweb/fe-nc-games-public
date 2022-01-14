@@ -51,7 +51,7 @@
 
 - [x] Serves all reviews / top reviews
 - [x] Can vote on reviews
-- [ ] Can vote a maximum of once in either direction per page load
+- [x] Can vote a maximum of once in either direction per page load
 - [x] Votes are persistent when page is refreshed
 - [x] Reviews by category pages load only relevant reviews (especially when navigating from one category page to another)
 - [x] Can sort reviews by date created / comment_count / votes
@@ -90,7 +90,11 @@
 
 ---
 
-**_This could be applied to the isLoading pattern - you could set your useEffects to run one after each other without overcomplicating and having fetchingReviews and fetchingCategories in the same component. Also, again, abstract your API functions into either hooks or an api file. In your reviews.js you have `sort === ""` - this could be checked using `!sort`, as an ampty string is a falsy value, and you are specifying the constraints so could guard against it coming through as anything else (null, 0, undefined etc.). These component files can get to being very unwieldy if there is too much stuff happening in one component!_**
+**_This could be applied to the isLoading pattern - you could set your useEffects to run one after each other without overcomplicating and having fetchingReviews and fetchingCategories in the same component._**
+
+<!-- This was done as I only want the sorting/filter bar to update itself only on mounting, whereas the reviews want to update every time there is a sort or filter selected. -->
+
+**_Also, again, abstract your API functions into either hooks or an api file. In your reviews.js you have `sort === ""` - this could be checked using `!sort`, as an ampty string is a falsy value, and you are specifying the constraints so could guard against it coming through as anything else (null, 0, undefined etc.). These component files can get to being very unwieldy if there is too much stuff happening in one component!_**
 
 ---
 

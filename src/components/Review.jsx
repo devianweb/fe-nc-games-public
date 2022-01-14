@@ -2,13 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../contexts/User/User";
 import NotFoundPage from "./NotFoundPage";
+import { patchReviewById, getReviewById } from "./utils/api";
 
 import "./css/Review.css";
 
 // MUI STUFF
 import { Paper, LinearProgress, IconButton } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-
 // END OF MUI STUFF
 
 const Review = () => {
@@ -23,8 +23,7 @@ const Review = () => {
   useEffect(() => {
     setIsError(false);
     setIsLoading(true);
-    fetch(`https://ian-nc-games.herokuapp.com/api/reviews/${review_id}`)
-      .then((res) => checkError(res))
+    getReviewById(review_id)
       .then((data) => {
         setIsLoading(false);
         setReview(data.review);
@@ -35,14 +34,7 @@ const Review = () => {
   }, [review_id]);
 
   const handleClick = () => {
-    fetch(`https://ian-nc-games.herokuapp.com/api/reviews/${review_id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ inc_votes: 1 }),
-    })
-      .then((res) => checkError(res))
+    patchReviewById(review_id)
       .then(() => {
         setReview((currReview) => {
           return { ...currReview, votes: currReview.votes + 1 };
@@ -52,14 +44,6 @@ const Review = () => {
       .catch((err) => {
         setIsError(true);
       });
-  };
-
-  const checkError = (res) => {
-    if (res.status >= 200 && res.status <= 299) {
-      return res.json();
-    } else {
-      throw Error(res.statusText);
-    }
   };
 
   return isError ? (

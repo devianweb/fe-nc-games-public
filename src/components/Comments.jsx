@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import CommentCard from "./CommentCard";
 import "./css/Comments.css";
 import { UserContext } from "../contexts/User/User";
+import { getCommentsByReviewId } from "./utils/api";
 
 // MUI STUFF
 import { Paper, Button, TextField } from "@mui/material";
@@ -74,10 +75,7 @@ const Comments = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://ian-nc-games.herokuapp.com/api/reviews/${review_id}/comments`
-    )
-      .then((res) => checkError(res))
+    getCommentsByReviewId(review_id)
       .then((data) => {
         setIsLoading(false);
         setComments(data.comments);

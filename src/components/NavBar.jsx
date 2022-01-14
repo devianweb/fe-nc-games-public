@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./css/NavBar.css";
 import { UserContext } from "../contexts/User/User";
+import { getUsers } from "./utils/api";
 // MUI STUFF
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -20,7 +21,6 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
-
 // END OF MUI STUFF
 
 const NavBar = () => {
@@ -58,20 +58,18 @@ const NavBar = () => {
 
   const handleSubmit = () => {
     setModal(true);
-    fetch("https://ian-nc-games.herokuapp.com/api/users")
-      .then((res) => res.json())
-      .then((data) => {
-        const validUsers = data.usernames.map((values) => values.username);
-        if (validUsers.includes(username)) {
-          userLogin(username);
-          setUsername("");
-          setModal(false);
-          setIsError(false);
-        } else {
-          setIsError(true);
-          setUsername("");
-        }
-      });
+    getUsers().then((data) => {
+      const validUsers = data.usernames.map((values) => values.username);
+      if (validUsers.includes(username)) {
+        userLogin(username);
+        setUsername("");
+        setModal(false);
+        setIsError(false);
+      } else {
+        setIsError(true);
+        setUsername("");
+      }
+    });
   };
 
   return (
