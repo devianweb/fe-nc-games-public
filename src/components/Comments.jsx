@@ -120,7 +120,13 @@ const Comments = () => {
           <p>There are no comments on this review!</p>
         ) : (
           comments.map((comment) => {
-            return <CommentCard comment={comment} key={comment.comment_id} />;
+            return (
+              <CommentCard
+                comment={comment}
+                key={comment.comment_id}
+                setComments={setComments}
+              />
+            );
           })
         )}
       </Paper>

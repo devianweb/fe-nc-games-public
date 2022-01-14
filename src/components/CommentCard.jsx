@@ -6,7 +6,7 @@ import { UserContext } from "../contexts/User/User";
 import { useContext } from "react";
 import "./css/CommentCard.css";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, setComments }) => {
   const { user } = useContext(UserContext);
 
   const screenSize = useMediaQuery("only screen and (max-width: 600px)");
@@ -17,7 +17,13 @@ const CommentCard = ({ comment }) => {
       {
         method: "DELETE",
       }
-    );
+    ).then(() => {
+      setComments((prevComments) => {
+        return prevComments.filter((value) => {
+          return value.comment_id !== comment.comment_id;
+        });
+      });
+    });
   };
 
   return (
