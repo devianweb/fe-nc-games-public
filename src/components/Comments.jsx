@@ -55,7 +55,7 @@ const Comments = () => {
   };
 
   const checkEmpty = () => {
-    if (newComment !== "") {
+    if (newComment !== "" && newComment.length <= 400) {
       return handleClick();
     } else {
       setComErr(true);
@@ -95,7 +95,6 @@ const Comments = () => {
               multiline
               onChange={handleChange}
               value={newComment}
-              inputProps={{ maxLength: 400 }}
             />
             <div className="post-comment">
               <Button
